@@ -1,0 +1,10 @@
+body{
+  margin-left: 5rem;
+  margin-top: 5rem;
+}
+
+
+#newToDoText {
+  border: none;
+  border-bottom: 1px solid black;
+}
