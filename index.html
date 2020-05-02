@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>To-Do App</title>
+
+    <!-- Material Design Lite -->
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.grey-lime.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles/main.css">
+
+  </head>
+
+  <body>
+    <header class="mdl-layout__header_mdl-layout__header--transparent">
+      <h1>To-Do App</h1>
+    </header>
+    <!-- Write your comments here
+    input for the user to input the text
+    button to submit the to-do.
+    We'll put these together into a form element
+     -->
+    <form id="addToDoForm">
+      <label for="newToDoText">New To-Do:</label>
+      <input type="text" id="newToDoText">
+      <button type="submit">Add To-Do!</button>
+    </form>
+
+    <!--Displaying the list of to-dos using an unordered list.
+      -->
+
+    <ul id="toDoList">
+    </ul>
+
+    <!--links to our JavaScript file
+      -->
+    <script src="app.js"></script>
+
+  </body>
+</html>
