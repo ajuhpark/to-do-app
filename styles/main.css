@@ -15,7 +15,13 @@ body{
   width: 500px;
   height: 30px
 
+  color: black;
+  font-size: 30px;
+  font-weight: lighter;
 
+  outline:none;
+
+  }
 }
 
 ::placeholder {
@@ -31,6 +37,8 @@ body{
 
 #arrowButton {
   float: right;
+  border: none;
+  background-color: none;
 }
 
 deleteBtn {

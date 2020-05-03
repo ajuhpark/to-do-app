@@ -30,7 +30,8 @@ function onReady(){
     console.log(toDos);
 
 
-
+    //createelement syntax:
+    //var element = document.createElement(tagName[, options]);
     //create a new input
     let checkbox = document.createElement('input');
 
@@ -81,9 +82,9 @@ function onReady(){
     //empty the input
     newToDoText.value = '';
 
+
   });
 }
-
 
 
 
