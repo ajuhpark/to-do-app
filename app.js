@@ -2,6 +2,8 @@ function onReady(){
   const addToDoForm = document.getElementById('addToDoForm');
   const newToDoText = document.getElementById('newToDoText');
   const toDoList = document.getElementById('toDoList');
+  const arrow = document.getElementById('arrow');
+
 
   let toDos= [];
   let toDoId = 1;
@@ -29,11 +31,11 @@ function onReady(){
 
 
 
-    //create a new li
-    let newLi = document.createElement('li');
-
     //create a new input
     let checkbox = document.createElement('input');
+
+    //create a new li
+    let newLi = document.createElement('li');
 
     //make delete button
     let deleteBtn = document.createElement('button');
