@@ -1,108 +1,95 @@
 function onReady(){
+  //Our state is going to be an array of to-dos.
+  let toDos = [];
+  //access the HTML form.
   const addToDoForm = document.getElementById('addToDoForm');
-  const newToDoText = document.getElementById('newToDoText');
-  const toDoList = document.getElementById('toDoList');
-  const arrow = document.getElementById('arrow');
 
-
-  let toDos= [];
-  let toDoId = 1;
 
   /*
-  We'll pass in the event as an argument to the event handler,
-  and then call the preventDefault() method on it within the
-  function.
+  add a function called createNewToDo() which will
+  update our array of to-dos. We'll call createNewToDo()
+  with an event listener on our form.
   */
-  addToDoForm.addEventListener('submit', event => {
-    event.preventDefault();
+  function createNewToDo(){
 
-    //Get the text from the input and assign it to a variable, title.
-    let title = newToDoText.value;
+    /*access the text input, so that we can get
+    the text for the title of each to-do.*/
+    const newToDoText = document.getElementById('newToDoText');
 
-    let toDoObj = {
-      name: title,
-      id: toDoId
-    }
-
-    toDoId++;
-    toDos.push(toDoObj);
-
-    console.log(toDos);
-
-
-    //createelement syntax:
-    //var element = document.createElement(tagName[, options]);
-    //create a new input
-    let checkbox = document.createElement('input');
-
-    //create a new li
-    let newLi = document.createElement('li');
-
-    //make delete button
-    let deleteBtn = document.createElement('button');
-
-    //assign name to delete button
-    deleteBtn.textContent = "Delete";
-
-    //add event listener for delete button
-    deleteBtn.addEventListener('click', function(event){
-      let buttonLiText = this.parentElement.childNodes[0].textContent;
-
-      toDoList.removeChild(this.parentElement);
-
-      //foreach item, run this function
-      toDos.forEach(function(currentToDo, index){
-        // console.log(currentToDo,index);
-        // console.log(this);
-
-        if(currentToDo === buttonLiText){
-          //remove from array
-          //splice chooses location and how many.
-          toDos.splice(index, 1);
-        }
-        console.log(toDos);
-      })
-    })
-
-    //set the input's type to checkbox
-    checkbox.type = "checkbox";
-
-    // set the title
-    newLi.textContent = title;
-
-    /*i want to put in a delete button to the side and
-    also put the checkbox before the text.
-    node.insertBefore(newnode, existingnode)
-
-    */
-    // attach the checkbox to the li
-    newLi.appendChild(checkbox);
-
-    //attach delete button
-    newLi.appendChild(deleteBtn);
-
-    //attach the li to the ul
-    toDoList.appendChild(newLi);
-
-    //empty the input
+    //add the new to-do to the toDos array using the push() method.
+    toDos.push({
+      //assign the value of the text input, newToDoText to the title key.
+      title: newToDoText.value,
+      // create another key called complete and initialize it to false.
+      complete: false
+    });
     newToDoText.value = '';
 
+    //call renderTheUI() every time the state changes
+    renderTheUI();
+  }
 
+  //add event listener using submit event of the form element.
+  addToDoForm.addEventListener('submit', event => {
+
+    /*call preventDefault() on the submit event to
+    prevent the page from reloading.*/
+    event.preventDefault();
+
+    //call createNewToDo() function we just created.
+    createNewToDo();
   });
+
+  /*
+  We'll create a function, renderTheUI() which will render
+  the UI based on the current state. When the app first loads,
+  we want to display the initial state, which will be an
+  empty text input and button.
+  Let's first add the call to renderTheUI() to onReady().
+
+  Now, when the page loads, it will immediately render
+  the initial UI, with the event listener listening
+  for a submit event from the form.
+  */
+  renderTheUI(){
+    //access the <ul> in the HTML.
+    const toDoList = document.getElementById('toDoList');
+
+    //set newLi to an empty string.
+    newLi.textContent = '';
+
+    /*
+    use the array method called forEach() which takes a
+    function and applies that function to each item in
+    the array. Using forEach is how we'll render each
+    to-do as a li in the ul.
+    */
+    toDos.forEach(function(toDo){
+      /*
+      The function we pass to forEach() will need to do three things:
+      Create the UI we need for each to-do (the li and checkbox).
+      Assign the toDo's title text to the li.
+      Update the DOM with the li and checkbox.
+      */
+
+      //create li and checkbox
+        const newLi = document.createElement('li');
+        const checkbox = document.createElement('input');
+        checkbox.type = "checkbox";
+
+      //add the toDo's title text to newLi.
+      newLi.textContent = toDo.title;
+
+      //update DOM
+      toDoList.appendChild(newLi);
+      newLi.appendChild(checkbox);
+
+    })
+  };
 }
 
 
 
-
-
-
-
-
-//pass an anonymous function that calls a JavaScript alert():
-/*
-We'll create our app in a function called onReady,
-and call that function within the event handler.
-*/
 window.onload = function() {
   onReady();
 }
