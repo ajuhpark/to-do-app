@@ -70,6 +70,11 @@ function onReady(){
     // set the title
     newLi.textContent = title;
 
+    /*i want to put in a delete button to the side and
+    also put the checkbox before the text.
+    node.insertBefore(newnode, existingnode)
+
+    */
     // attach the checkbox to the li
     newLi.appendChild(checkbox);
 
