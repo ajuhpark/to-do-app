@@ -9,6 +9,7 @@ function onReady(){
 
   //Our state is going to be an array of to-dos.
   let toDos = [];
+  let id = 0;
 
   /*
   We'll create a function, renderTheUI() which will render
@@ -46,12 +47,26 @@ function onReady(){
       const checkbox = document.createElement('input'); //<input>
       checkbox.type = "checkbox"; //<input type-"checkbox"/>
 
+      //create delete button
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = "Delete";
+
+      deleteBtn.addEventListener('click', event =>{
+        toDos = toDos.filter(function(item){
+          //for all of my todos, which ones don't match the ones I clicked for?
+          return item.id != toDo.id;
+        })
+        renderTheUI();
+      });
+
       //add the toDo's title text to newLi.
       newLi.textContent = toDo.title; //<li>hello!</li>
 
       //update DOM
       toDoList.appendChild(newLi); //
       newLi.appendChild(checkbox);//<li>Hello <input type="checkbox"/></li>
+      newLi.appendChild(deleteBtn);
+      console.log(newLi);
     })
   }
 
@@ -66,20 +81,25 @@ function onReady(){
     the text for the title of each to-do.*/
     const newToDoText = document.getElementById('newToDoText');
     //if newToDoText does not exist, get out.
-    if(newToDoText.value){ return;}
+    // if(newToDoText.value){ return;}
     //add the new to-do to the toDos array using the push() method.
     toDos.push({
       //assign the value of the text input, newToDoText to the title key.
       title: newToDoText.value,
       // create another key called complete and initialize it to false.
-      complete: false
+      complete: false,
+      id: id
     });
+    //for each todo we make, it keeps track of ids
+    id++;
+    console.log(toDos);
 
     //when we submit the to do, it empties.
     newToDoText.value = '';
 
     //call renderTheUI() every time the state changes
     renderTheUI();
+    console.log("hello"); //test
 
   }
   //add event listener using submit event of the form element.
@@ -91,7 +111,7 @@ function onReady(){
 
     //call createNewToDo() function we just created.
     createNewToDo();
-
+    console.log("hi");//test
   });
 
   //call renderTheUI() every time the state changes
